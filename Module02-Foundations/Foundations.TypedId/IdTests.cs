@@ -29,7 +29,6 @@ namespace Foundations.TypedId
             Assert.AreNotEqual(carId1, costId);
         }
 
-
         [Test]
         public void Deserialize()
         {

@@ -4,7 +4,7 @@
     {
         public CarId Id { get; set; }
 
-        // TODO: why all the setters?L
+        // TODO: why all the setters?
         public string Name { get; set; }
     }
 }
