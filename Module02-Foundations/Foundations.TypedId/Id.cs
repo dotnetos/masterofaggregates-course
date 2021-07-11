@@ -4,12 +4,18 @@ using Newtonsoft.Json;
 namespace Foundations.TypedId
 {
     [JsonConverter(typeof(GuidPrimitiveIdNewtonsoftJsonConverter))]
-    public abstract class GuidId<TId> : Id<Guid, TId> 
+    public abstract class GuidId<TId> : Id<Guid, TId>
         where TId : Id<Guid, TId>
     {
         protected GuidId(Guid value) : base(value)
         {
         }
+
+        /// <summary>
+        /// Creates the new id of the <typeparamref name="TId"/> type.
+        /// </summary>
+        /// <returns></returns>
+        public static TId New() => (TId)Activator.CreateInstance(typeof(TId), new object[] { Guid.NewGuid() });
     }
 
     public interface IId<TPrimitive>
@@ -52,7 +58,7 @@ namespace Foundations.TypedId
         public static bool operator !=(Id<TPrimitive, TId> left, Id<TPrimitive, TId> right) => !Equals(left, right);
 
         #endregion
-        
+
         public override string ToString() => $"{GetType().Name}/{Value}";
     }
 
